@@ -5,16 +5,16 @@
     overflow: hidden; 
     position: relative; 
     width: 80%;
+    height: 600px; 
 }
 
 .carousel-image-wrapper{
     display: flex;
     transform: translateX(0);
-    transition: transform 0.25s;
+    transition: transform 0.20s;
 }
 
 img{
-    border-radius: 5px;
     vertical-align: middle;
 }
 
@@ -63,6 +63,16 @@ img{
 .active, .dot-contain:hover {
 background-color: #717171;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
