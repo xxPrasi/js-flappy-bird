@@ -1,1 +1,0 @@
-const IMAGE_WIDTH = 1439; 
