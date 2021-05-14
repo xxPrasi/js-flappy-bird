@@ -158,6 +158,63 @@ const gameOver = {
     
 }
 
+const pipes = {
+    position : [],
+    
+    top : {
+        sX : 553,
+        sY : 0
+    },
+    bottom:{
+        sX : 502,
+        sY : 0
+    },
+    
+    w : 53,
+    h : 180,
+    gap : 85,
+    maxYPos : -150,
+    dx : 2,
+    
+    draw : function(){
+        for(let i  = 0; i < this.position.length; i++){
+            let p = this.position[i];
+            
+            let topYPos = p.y;
+            let bottomYPos = p.y + this.h + this.gap;
+            
+            ctx.drawImage(sprite, this.top.sX, this.top.sY, this.w, this.h, p.x, topYPos, this.w, this.h);  
+            
+            ctx.drawImage(sprite, this.bottom.sX, this.bottom.sY, this.w, this.h, p.x, bottomYPos, this.w, this.h);  
+        }
+    },
+    
+    update: function(){
+        if(state.current !== state.game) return;
+        
+        if(frames%100 == 0){
+            this.position.push({
+                x : cvs.width,
+                y : this.maxYPos * ( Math.random() + 1)
+            });
+        }
+        for(let i = 0; i < this.position.length; i++){
+            let p = this.position[i];
+
+            p.x -= this.dx;
+
+            if(p.x + this.w <= 0){
+                this.position.shift();
+            }
+            
+        }
+    },
+
+    reset : function(){
+        this.position = [];
+    }
+    
+}
 
 
 function draw(){
@@ -165,6 +222,7 @@ function draw(){
     ctx.fillRect(0, 0, cvs.width, cvs.height);
     
     bg.draw();
+    pipes.draw(); 
     fg.draw();
     bird.draw();
     getReady.draw();
@@ -174,6 +232,7 @@ function draw(){
 function update(){
    bird.update(); 
    fg.update(); 
+   pipes.update();
 }
 
 
